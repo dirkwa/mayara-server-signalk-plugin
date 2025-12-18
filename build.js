@@ -8,7 +8,6 @@
  *   --local-gui  Use local mayara-gui instead of npm (for development)
  */
 
-const { execSync } = require('child_process')
 const fs = require('fs')
 const path = require('path')
 
@@ -18,16 +17,6 @@ const useLocalGui = args.includes('--local-gui')
 // Paths (relative to this script's directory)
 const scriptDir = __dirname
 const publicDest = path.join(scriptDir, 'public')
-
-function run(cmd, options = {}) {
-  console.log(`> ${cmd}`)
-  try {
-    execSync(cmd, { stdio: 'inherit', cwd: options.cwd || scriptDir, ...options })
-  } catch (e) {
-    console.error(`Command failed: ${cmd}`)
-    process.exit(1)
-  }
-}
 
 /**
  * Recursively copy directory contents
@@ -63,13 +52,17 @@ function copyDir(src, dest) {
  * Download GUI from npm and copy to public/
  */
 function setupGuiFromNpm() {
-  console.log('Downloading GUI from npm...\n')
+  console.log('Copying GUI from node_modules...\n')
 
-  // Install dependencies (includes @marineyachtradar/mayara-gui)
-  run('npm install')
-
-  // Copy files from package root (no dist/ folder)
+  // Dependencies should already be installed by npm install
+  // (this script runs as postinstall, so node_modules exists)
   const guiSource = path.join(scriptDir, 'node_modules', '@marineyachtradar', 'mayara-gui')
+
+  if (!fs.existsSync(guiSource)) {
+    console.error('Error: @marineyachtradar/mayara-gui not found in node_modules')
+    console.error('Make sure it is listed in package.json dependencies')
+    process.exit(1)
+  }
 
   // Remove old public dir
   if (fs.existsSync(publicDest)) {
