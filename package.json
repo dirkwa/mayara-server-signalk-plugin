@@ -1,11 +1,12 @@
 {
   "name": "@marineyachtradar/signalk-plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "MaYaRa Radar - Connect SignalK to mayara-server",
   "main": "plugin/index.js",
   "scripts": {
     "build": "node build.js",
-    "postinstall": "node build.js"
+    "postinstall": "node build.js",
+    "test": "echo \"No tests yet\" && exit 0"
   },
   "keywords": [
     "signalk-node-server-plugin",
