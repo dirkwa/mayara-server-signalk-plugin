@@ -32,7 +32,7 @@ This plugin acts as a thin proxy layer between SignalK and mayara-server. All ra
 
 ## Requirements
 
-- **SignalK Server** >= 3.0.0 (with Radar API support)
+- **SignalK Server** PR 2158 (with Radar API support)
 - **mayara-server** running and accessible on the network
 
 ## Installation
