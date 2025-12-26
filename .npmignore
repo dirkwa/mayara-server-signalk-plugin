@@ -12,4 +12,3 @@ yarn.lock
 coverage/
 dist/
 build/
-public/

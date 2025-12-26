@@ -100,15 +100,29 @@ http://your-signalk-server:3000/@marineyachtradar/signalk-plugin/
 
 ## Development
 
-```bash
-# Use local mayara-gui instead of npm version
-npm run build -- --local-gui
+After cloning, install dependencies and build the GUI:
 
-# Link for development
+```bash
+npm install
+npm run build
+```
+
+To use a local `mayara-gui` checkout (sibling directory) instead of npm:
+
+```bash
+npm run build -- --local-gui
+```
+
+For development linking:
+
+```bash
 npm link
 cd ~/.signalk
 npm link @marineyachtradar/signalk-plugin
 ```
+
+> **Note:** The `public/` directory is gitignored but included in the npm tarball.
+> It's built automatically during `npm publish` via `prepublishOnly`.
 
 ## License
 
